@@ -30,7 +30,7 @@ let square x = x *. x
 (* zgodnie ze specyfikacja *)
 let kolko (p : point) (r : float) : kartka =
         fun (x, y) ->
-            if square (x -. fst p) +. square (y -. snd p) <= square r +. epsilon then 1
+            if hypot (x -. fst p) (y -. snd p) <= r +. epsilon then 1
             else 0
 
 (* iloczyn skalarny *)
@@ -91,7 +91,7 @@ let skladaj (l : (point * point) list) (k : kartka) : kartka =
 
 (* TESTY *)
 
-(*
+
 
 let centr = (0., 0.);;
 let info = false;;
@@ -505,7 +505,7 @@ let a = skladaj l a;;
 assert(a centr = (1 lsl const) + 1);;
 assert(a (1., 1.) = 1 lsl const);;
 assert(a (-1., -1.) = 2);;
-(* assert(a ((-.max_float) /. 2., (-.max_float) /. 2.) = 0);; *)
+assert(a ((-.max_float) /. 2., (-.max_float) /. 2.) = 0);;
 assert(a (max_float /. 4., max_float /. 4.) = 0);;
 
 for i = -2 downto -100000 do
@@ -516,4 +516,4 @@ if info then print_endline "OK";;
 
 if info then print_endline "All tests OK.";;
 
-*)
+
